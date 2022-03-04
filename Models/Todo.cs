@@ -43,5 +43,29 @@ namespace Todo_app.Models
             this.id = id;
             this.description = description;
         }
+
+        public Todo(int id, string description, bool done, Person person)
+        {
+            this.done = done;
+            this.id = id;
+            this.description = description;
+            this.assignee = person;
+        }
+
+        public Todo()
+        {
+            
+        }
+
+        public bool Done
+        {
+            get { return done; }
+        }
+
+        public Todo(Person assignee)
+        {
+            this.assignee = assignee;
+        }
+
     }
 }
