@@ -19,27 +19,23 @@ namespace Todo_app.Data
         }
 
         public Todo FindById(int todoId)
-        {
-            Todo foundToDo = new Todo();
+        {         
+
             foreach (Todo checkTodo in todo)
             {
                 if (checkTodo.Id == todoId)
                 {
-                    foundToDo = checkTodo;
+                    return checkTodo;
                 }
             }
-            return foundToDo;
+            return null;
         }
 
         public Todo AddTodo(string desc)
         {
             Todo newTodo = new Todo(TodoSequencer.NextTodoId(), desc, false);
-
-            Todo[] newTaskTodo = new Todo[todo.Length + 1];
-            todo.CopyTo(newTaskTodo, 0);
-            newTaskTodo[todo.Length] = newTodo;
-            todo = newTaskTodo;
-
+            Array.Resize(ref todo, Size() + 1);
+            todo[todo.Length - 1] = newTodo;
             return newTodo;
         }
         public void Clear()
@@ -62,18 +58,57 @@ namespace Todo_app.Data
             }
         }
 
+
         public Todo FindByAssignee(int personID)
         {
-
             Todo foundToDo = new Todo();
             foreach (Todo checkTodo in todo)
             {
-                if (checkTodo.assignee.Id == personID)
+                if ((checkTodo.assignee != null) && checkTodo.assignee.Id == personID)
+                {
+                    foundToDo = checkTodo;
+                }
+            }
+
+            return foundToDo;
+        }
+
+        public Todo FindByUnAssigneeTodoItems()
+        {
+            Todo foundToDo = new Todo();
+            foreach (Todo checkTodo in todo)
+            {
+                if (checkTodo.assignee == null)
                 {
                     foundToDo = checkTodo;
                 }
             }
             return foundToDo;
         }
+
+        public int GetIndexForTodoId(int todoId)
+        {
+            for (int index = 0; index < todo.Length; index++)
+            {
+                if (todo[index].Id == todoId)
+                {
+                    return index;
+                }
+            }
+            return todo.Length;
+        }
+
+        public bool RemoveTodo(int todoId)
+        {
+            int index = GetIndexForTodoId(todoId);
+            if (index == todo.Length)
+            {
+                return false;
+            }
+            Array.Copy(todo, index + 1, todo, index, todo.Length - index - 1);
+            Array.Resize<Todo>(ref todo, todo.Length - 1);
+            return true;
+        }
+
     }
 }

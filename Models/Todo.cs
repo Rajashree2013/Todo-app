@@ -6,35 +6,28 @@ namespace Todo_app.Models
 {
     class Todo
     {
+        // Variable declaration 
         private int id;
         private string description;
         private bool done;
-        private Person assignee;
+        public Person assignee;
 
+        public Todo()
+        { }
+
+        public Todo(int id)
+        {
+            this.id = id;
+        }
+        public Todo(Person assignee)
+        {
+            this.assignee = assignee;
+        }
 
         public Todo(int id, string description)
         {
-           this.id = id;
-           this.description = description;
-        }
-
-        public int Id
-        { 
-            get => id;
-        }
-        
-        public string Description
-        {
-            get { 
-                return description; 
-            }
-            set
-            {
-                if (!value.Equals(null) && !value.Equals(""))
-                {
-                    description = value;
-                }
-            }
+            this.id = id;
+            this.description = description;
         }
 
         public Todo(int id, string description, bool done)
@@ -52,20 +45,38 @@ namespace Todo_app.Models
             this.assignee = person;
         }
 
-        public Todo()
-        {
-            
-        }
 
+        public string Description
+        {
+            get { 
+                return description;
+            }
+            set
+            {                
+                description = value;
+            }
+        }
         public bool Done
         {
-            get { return done; }
+            get {
+                return done;
+            }
+            set { 
+                done = value; 
+            }
         }
 
-        public Todo(Person assignee)
+        public int Id
         {
-            this.assignee = assignee;
+            get { return id; }
+            set
+            {
+                if (id < 1)
+                {
+                    throw new ArgumentOutOfRangeException("ID can not be less than 1 !!");
+                }
+                id = value;
+            }
         }
-
     }
 }

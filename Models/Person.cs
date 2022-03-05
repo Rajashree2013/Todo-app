@@ -6,10 +6,13 @@ namespace Todo_app.Models
 {
     public class Person
     {
+        // Variable declarations
         private int id;
         private String firstName;
         private String lastName;
 
+
+        // First and Last names should not null and blank, Id should be greater than zero 
         public Person(int id, string firstName, string lastName)
         {
             if ((!firstName.Equals(null) && !firstName.Equals("") && !lastName.Equals(null) && !lastName.Equals("")) || (id > 0))
