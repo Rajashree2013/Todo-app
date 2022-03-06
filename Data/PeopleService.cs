@@ -5,7 +5,7 @@ using Todo_app.Models;
 
 namespace Todo_app.Data
 {
-    class PeopleService
+    public class PeopleService
     {
         // Declaration person array with static and not null
         private static Person[] people = new Person[0];

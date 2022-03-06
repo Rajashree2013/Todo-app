@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Todo_app.Data
 {
-    class PersonSequencer
+    public class PersonSequencer
     {
         private static int personId=0;
         public static int NextPersonId()

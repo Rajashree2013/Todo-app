@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Todo_app.Data
 {
-    class TodoSequencer
+    public class TodoSequencer
     {
         private static int todoId = 0;
         public static int NextTodoId()

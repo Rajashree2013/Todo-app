@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Todo_app.Models
 {
-    class Todo
+    public class Todo
     {
         // Variable declaration 
         private int id;
